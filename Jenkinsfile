@@ -46,6 +46,7 @@ pipeline {
             }
         }
      }
+    }
      stage('Init') {
        agent{label 'TerraformAgent'}
        steps {
@@ -68,7 +69,6 @@ pipeline {
          }
     }
    }
-    }
       stage('Apply') {
        agent{label 'TerraformAgent'}
        steps {
