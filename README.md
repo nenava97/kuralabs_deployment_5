@@ -1,6 +1,9 @@
 <img src="https://github.com/kura-labs-org/kuralabs_deployment_1/blob/main/Kuralogo.png">
+
 # Kura Labs Deployment 5
   
+![Screen Shot 2022-11-15 at 5 35 14 PM](https://user-images.githubusercontent.com/108698688/202039443-4223f358-9a3c-4252-a58f-4da2764d7e76.png)
+
 ## Utilize a Jenkins server on a default VPC and Jenkins agents on a Terraform server and a Docker server to deploy a containerized url-shortner Flask application with Amazon Elastic Container Service (ECS).
 
 1. Install Jenkins on an EC2 in default VPC; the Jenkins manager will be on this EC2 and will relay duties to Jenkins agents in other EC2s when project pipeline is built. 
@@ -42,7 +45,16 @@ sudo usermod -a G docker ubuntu
 
 4. Create Jenkinsfile with Build, Test, Create Container, Push to Docker Hub, Terraform Init, Terraform Plan and Terraform Apply stages. Within the steps will clarify if a agent needs to be called, so the Jenkins manager will direct those agents to do respective stages of the pipeline in the EC2s they are on.
 
-5. Modify Terraform files to reflect Docker image location in Docker Hub (which will be used to make the container with Terraform as seen in main.tf) and add IAM ARN role that will allow ECS tasks to call AWS services. Terraform will create a ALB (to connect subnets to interna, a ECS cluster of containers in a VPC with 2 public and 2 private subnets, a nat gateway, route tables, internet gateway.????  
+5. Modify Terraform files to reflect Docker image location in Docker Hub (which will be used to make the container with Terraform as seen in main.tf) and add IAM ARN role that will allow ECS tasks to call AWS services. Terraform will create a ALB (to connect subnets to interna, a ECS cluster of containers in a VPC with 2 public and 2 private subnets, a nat gateway, route tables, internet gateway.
+
+6. Build Project in Jenkins and build. A cluster of the contained application will be created as seen in the screenshot below.    
 
 ![D5 cluster](https://user-images.githubusercontent.com/108698688/201431751-73fd6fcc-a48d-473d-bbb6-65f45c5f5490.jpg)
+
+Successful Deployment of containerized url-shortner application.
 ![D5 success](https://user-images.githubusercontent.com/108698688/201431729-25d601e0-fae7-4268-a305-bee8c341038e.jpg)
+
+## Improvements
+- Separate containers on separate virtual environments in various Availability Zones for security
+- Manage/monitor containers with Kubernetes 
+
